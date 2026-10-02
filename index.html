@@ -1,256 +1,230 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Študijný portál MPS</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galéria študijných materiálov</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
-      color: #e5f3ff;
-      min-height: 100vh;
-      padding: 20px;
+    :root {
+      --page-bg: #07192d;
+      --panel-bg: rgba(10, 26, 44, 0.9);
+      --panel-edge: #1fa9ff;
+      --panel-edge-soft: rgba(31, 169, 255, 0.65);
+      --text: #dfeef9;
+      --muted: rgba(223, 238, 249, 0.8);
+      --shadow: rgba(0, 0, 0, 0.35);
     }
 
-    .container { max-width: 900px; margin: 0 auto; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    header {
-      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-      color: white;
-      padding: 40px 24px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 32px rgba(14, 165, 233, 0.35);
+    body {
+      min-height: 100vh;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 18px 22px 30px;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 12px 18px;
+      color: #edf8ff;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: 0.02em;
+    }
+
+    .topbar .icon-box {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      background: linear-gradient(135deg, #7ccdfb, #3ec2ff);
+      color: #0a1a2d;
+      font-size: 12px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(190px, 1fr));
+      gap: 22px 28px;
+      margin-top: 8px;
+    }
+
+    .tile {
       position: relative;
+      height: 250px;
+      background: rgba(11, 25, 42, 0.92);
+      border: 2px solid var(--panel-edge);
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(116, 214, 255, 0.12), 0 0 0 1px rgba(18, 46, 75, 0.75);
       overflow: hidden;
     }
 
-    header::before {
-      content: '';
+    .tile::before {
+      content: "";
       position: absolute;
-      top: -60%;
-      right: -6%;
-      width: 320px;
-      height: 320px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 50%;
+      inset: 0;
+      background: rgba(10, 22, 35, 0.08);
+      pointer-events: none;
     }
 
-    header h1 {
-      margin: 0 0 12px 0;
-      font-size: 32px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header p {
-      margin: 0;
-      opacity: 0.95;
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-icons {
+    .tile .top-label,
+    .tile .bottom-label {
       position: absolute;
-      right: 30px;
-      top: 20px;
-      font-size: 52px;
-      opacity: 0.25;
-      z-index: 1;
-    }
-
-    .card {
-      background: rgba(17, 24, 39, 0.8);
-      padding: 28px;
-      margin-bottom: 24px;
-      border-radius: 12px;
-      border: 1px solid rgba(59, 130, 246, 0.35);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(56, 189, 248, 0.75);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #7dd3fc;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .icon { font-size: 24px; }
-
-    input[type="password"] {
-      padding: 12px 14px;
-      border: 2px solid rgba(56, 189, 248, 0.5);
-      border-radius: 8px;
-      font-size: 14px;
-      width: 240px;
-      background: rgba(14, 165, 233, 0.05);
-      color: #e5f3ff;
-      transition: border-color 0.3s ease;
-    }
-
-    input[type="password"]:focus {
-      outline: none;
-      border-color: #7dd3fc;
-      background: rgba(14, 165, 233, 0.1);
-    }
-
-    button {
-      background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
+      left: 20px;
+      color: rgba(220, 240, 255, 0.95);
+      font-size: 1.05rem;
+      line-height: 1.2;
+      z-index: 2;
       font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      margin-top: 12px;
+      letter-spacing: 0.01em;
     }
 
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+    .tile .top-label {
+      top: 18px;
+      opacity: 0.9;
     }
 
-    button:active { transform: scale(0.98); }
-
-    .error {
-      color: #fca5a5;
-      margin-top: 12px;
-      font-size: 14px;
-      display: none;
-      background: rgba(239, 68, 68, 0.12);
-      padding: 10px;
-      border-radius: 6px;
-      border-left: 3px solid #f87171;
+    .tile .bottom-label {
+      bottom: 16px;
+      opacity: 0.95;
     }
 
-    ul {
-      padding-left: 20px;
-      line-height: 1.8;
-      margin: 20px 0;
-    }
-
-    li {
-      margin-bottom: 12px;
-      color: #e5f3ff;
-    }
-
-    .theme-icons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin: 20px 0;
-    }
-
-    .theme-icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 2px solid rgba(56, 189, 248, 0.35);
-      border-radius: 8px;
+    .tile .icon {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      color: #7dd3fc;
+      font-size: clamp(2rem, 2.6vw, 3rem);
+      color: rgba(255, 255, 255, 0.9);
+      z-index: 1;
+      opacity: 0.74;
+      text-shadow: 0 0 12px rgba(74, 206, 255, 0.35);
+    }
+
+    .tile .icon i {
+      transform: translateY(10px);
+    }
+
+    .server {
+      width: 280px;
+      height: 220px;
+      margin-top: 26px;
+      background: rgba(9, 25, 42, 0.92);
+      border: 2px solid var(--panel-edge);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(18, 46, 75, 0.75);
+      position: relative;
+    }
+
+    .server .image {
+      height: 166px;
+      background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: saturate(0.85) contrast(1.06) brightness(0.82);
+      border-bottom: 2px solid rgba(31, 169, 255, 0.4);
+    }
+
+    .server .label {
+      position: absolute;
+      left: 18px;
+      bottom: 12px;
+      color: rgba(220, 240, 255, 0.95);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 700px) {
+      .gallery {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .server {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <header>
-      <div class="header-icons">
-        <i class="fas fa-wifi"></i>
-      </div>
-      <h1>
-        <i class="fas fa-desktop"></i>
-        Odbor: Mechanik počítačových sietí
-      </h1>
-      <p>
-        <i class="fas fa-microchip"></i>
-        Informačný portál a zadania pre študijnú skupinu
-      </p>
+  <div class="page">
+    <header class="topbar">
+      <span class="icon-box"><i class="fa-solid fa-folder"></i></span>
+      <span>Galéria študijných materiálov</span>
     </header>
 
-    <div class="card">
-      <h2>
-        <i class="fas fa-bullhorn icon"></i>
-        Verejné oznamy
-      </h2>
-      <p>Vitajte na informačnej stránke odboru. Učebné texty, podklady a zadania cvičení sú prístupné v chránenej zóne nižšie.</p>
-
-      <div class="theme-icons">
-        <div class="theme-icon"><i class="fas fa-laptop"></i></div>
-        <div class="theme-icon"><i class="fas fa-server"></i></div>
-        <div class="theme-icon"><i class="fas fa-wifi"></i></div>
-        <div class="theme-icon"><i class="fas fa-network-wired"></i></div>
-        <div class="theme-icon"><i class="fas fa-microchip"></i></div>
-        <div class="theme-icon"><i class="fas fa-plug"></i></div>
+    <main class="gallery" aria-label="Galéria materiálov">
+      <div class="tile">
+        <div class="top-label">Počítač</div>
+        <div class="icon"><i class="fa-solid fa-desktop"></i></div>
+        <div class="bottom-label">Počítač</div>
       </div>
-    </div>
 
-    <div class="card" id="login-box">
-      <h2>
-        <i class="fas fa-lock icon"></i>
-        Vstup do študijnej zóny (pre žiakov)
-      </h2>
-      <p>Pre zobrazenie zadaní zadajte prístupové heslo skupiny:</p>
-      <input type="password" id="hesloInput" placeholder="Heslo skupiny" onkeydown="if(event.key==='Enter') skontrolujHeslo()">
-      <button onclick="skontrolujHeslo()">
-        <i class="fas fa-unlock"></i>
-        Odomknúť
-      </button>
-      <div id="chybaMsg" class="error">
-        <i class="fas fa-exclamation-circle"></i>
-        Nesprávne heslo, skúste znova.
+      <div class="tile">
+        <div class="top-label">WiFi</div>
+        <div class="icon"><i class="fa-solid fa-wifi"></i></div>
+        <div class="bottom-label">WiFi</div>
       </div>
-    </div>
 
-    <div class="card" id="chraneny-obsah" style="display: none;">
-      <h2>
-        <i class="fas fa-folder-open icon"></i>
-        Študijné materiály a zadania cvičení
-      </h2>
-      <p><strong>✅ Úspešne odomknuté!</strong> Tu sú vaše aktuálne zadania:</p>
-      <ul>
-        <li><strong><i class="fas fa-network-wired"></i> Zadanie 1:</strong> Návrh a adresácia podsietí IPv4 / IPv6</li>
-        <li><strong><i class="fas fa-ethernet"></i> Zadanie 2:</strong> Konfigurácia prepínačov a VLAN v Cisco Packet Tracer</li>
-        <li><strong><i class="fas fa-code-branch"></i> Zadanie 3:</strong> Príprava a verzovanie webovej prezentácie na GitHube</li>
-      </ul>
+      <div class="tile">
+        <div class="top-label">Sieť</div>
+        <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+        <div class="bottom-label">Sieť</div>
+      </div>
 
-      <p style="margin-top: 30px; font-size: 13px; color: #95a5a6;">
-        <i class="fas fa-clipboard-list"></i>
-        Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.
-      </p>
+      <div class="tile">
+        <div class="top-label">Počítač</div>
+        <div class="icon"><i class="fa-solid fa-desktop"></i></div>
+        <div class="bottom-label">Počítač</div>
+      </div>
+
+      <div class="tile">
+        <div class="top-label">WiFi</div>
+        <div class="icon"><i class="fa-solid fa-wifi"></i></div>
+        <div class="bottom-label">WiFi</div>
+      </div>
+
+      <div class="tile">
+        <div class="top-label">Sieť</div>
+        <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+        <div class="bottom-label">Sieť</div>
+      </div>
+    </main>
+
+    <div class="server" aria-label="Server">
+      <div class="image"></div>
+      <div class="label">Server</div>
     </div>
   </div>
-
-  <script>
-    function skontrolujHeslo() {
-      const heslo = document.getElementById("hesloInput").value;
-      if (heslo.trim().toLowerCase() === "mps2026") {
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("chraneny-obsah").style.display = "block";
-      } else {
-        document.getElementById("chybaMsg").style.display = "block";
-      }
-    }
-  </script>
-
 </body>
 </html>
