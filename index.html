@@ -4,67 +4,432 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Študijný portál MPS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background-color: #f6f8fa; color: #24292f; }
-    .container { max-width: 800px; margin: 0 auto; }
-    header { background: #0969da; color: white; padding: 24px; border-radius: 8px; margin-bottom: 20px; }
-    header h1 { margin: 0 0 8px 0; font-size: 24px; }
-    header p { margin: 0; opacity: 0.9; }
-    .card { background: white; padding: 24px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #d0d7de; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    h2 { margin-top: 0; color: #1f2328; font-size: 18px; }
-    input[type="password"] { padding: 10px 12px; border: 1px solid #d0d7de; border-radius: 6px; font-size: 14px; width: 220px; }
-    button { background: #2da44e; color: white; border: none; padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
-    button:hover { background: #2c974b; }
-    .error { color: #cf222e; margin-top: 10px; font-size: 14px; display: none; }
-    ul { padding-left: 20px; line-height: 1.6; }
-    li { margin-bottom: 6px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      background: linear-gradient(135deg, #0f172a 0%, #111827 100%); 
+      color: #e5f3ff; 
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container { max-width: 900px; margin: 0 auto; }
+    
+    header { 
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: white; 
+      padding: 40px 24px;
+      border-radius: 12px; 
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(14, 165, 233, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -6%;
+      width: 320px;
+      height: 320px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+    }
+    
+    header h1 { 
+      margin: 0 0 12px 0; 
+      font-size: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    header p { 
+      margin: 0; 
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header-icons {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      font-size: 52px;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    
+    .card { 
+      background: rgba(17, 24, 39, 0.8);
+      padding: 28px; 
+      margin-bottom: 24px; 
+      border-radius: 12px; 
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.75);
+    }
+    
+    h2 { 
+      margin-top: 0; 
+      color: #7dd3fc;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    h3 {
+      margin-top: 24px;
+      color: #7dd3fc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .icon { font-size: 24px; }
+    
+    input[type="password"] { 
+      padding: 12px 14px; 
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      border-radius: 8px; 
+      font-size: 14px; 
+      width: 240px;
+      background: rgba(14, 165, 233, 0.05);
+      color: #e5f3ff;
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #7dd3fc;
+      background: rgba(14, 165, 233, 0.1);
+    }
+    
+    button { 
+      background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+      color: white; 
+      border: none; 
+      padding: 12px 24px; 
+      border-radius: 8px; 
+      font-size: 14px; 
+      font-weight: 600; 
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 12px;
+    }
+    
+    button:hover { 
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+    }
+    
+    button:active { transform: scale(0.98); }
+    
+    .error { 
+      color: #fca5a5; 
+      margin-top: 12px; 
+      font-size: 14px; 
+      display: none;
+      background: rgba(239, 68, 68, 0.12);
+      padding: 10px;
+      border-radius: 6px;
+      border-left: 3px solid #f87171;
+    }
+    
+    ul { 
+      padding-left: 20px; 
+      line-height: 1.8;
+      margin: 20px 0;
+    }
+    
+    li { 
+      margin-bottom: 12px;
+      color: #e5f3ff;
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s ease;
+      min-height: 180px;
+      background: rgba(15, 23, 42, 0.8);
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .gallery-item .delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(239, 68, 68, 0.9);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .gallery-item:hover .delete-btn {
+      display: flex;
+    }
+    
+    .upload-box {
+      border: 2px dashed rgba(56, 189, 248, 0.6);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      background: rgba(56, 189, 248, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    
+    .upload-box:hover {
+      border-color: rgba(125, 211, 252, 0.9);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    
+    .upload-box input[type="file"] {
+      display: none;
+    }
+    
+    .upload-icon {
+      font-size: 40px;
+      color: #7dd3fc;
+      margin-bottom: 10px;
+    }
+    
+    .theme-icons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    .theme-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 2px solid rgba(56, 189, 248, 0.35);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: #7dd3fc;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
     <header>
-      <h1>Odbor: Mechanik počítačových sietí</h1>
-      <p>Informačný portál a zadania pre študijnú skupinu</p>
+      <div class="header-icons">
+        <i class="fas fa-wifi"></i>
+      </div>
+      <h1>
+        <i class="fas fa-desktop"></i>
+        Odbor: Mechanik počítačových sietí
+      </h1>
+      <p>
+        <i class="fas fa-microchip"></i>
+        Informačný portál a zadania pre študijnú skupinu
+      </p>
     </header>
 
     <div class="card">
-      <h2>📢 Verejné oznamy</h2>
+      <h2>
+        <i class="fas fa-bullhorn icon"></i>
+        Verejné oznamy
+      </h2>
       <p>Vitajte na informačnej stránke odboru. Učebné texty, podklady a zadania cvičení sú prístupné v chránenej zóne nižšie.</p>
+      
+      <div class="theme-icons">
+        <div class="theme-icon"><i class="fas fa-laptop"></i></div>
+        <div class="theme-icon"><i class="fas fa-server"></i></div>
+        <div class="theme-icon"><i class="fas fa-wifi"></i></div>
+        <div class="theme-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="theme-icon"><i class="fas fa-microchip"></i></div>
+        <div class="theme-icon"><i class="fas fa-plug"></i></div>
+      </div>
     </div>
 
-    <!-- Prihlasovací blok -->
     <div class="card" id="login-box">
-      <h2>🔒 Vstup do študijnej zóny (pre žiakov)</h2>
+      <h2>
+        <i class="fas fa-lock icon"></i>
+        Vstup do študijnej zóny (pre žiakov)
+      </h2>
       <p>Pre zobrazenie zadaní zadajte prístupové heslo skupiny:</p>
       <input type="password" id="hesloInput" placeholder="Heslo skupiny" onkeydown="if(event.key==='Enter') skontrolujHeslo()">
-      <button onclick="skontrolujHeslo()">Odomknúť</button>
-      <div id="chybaMsg" class="error">❌ Nesprávne heslo, skúste znova.</div>
+      <button onclick="skontrolujHeslo()">
+        <i class="fas fa-unlock"></i>
+        Odomknúť
+      </button>
+      <div id="chybaMsg" class="error">
+        <i class="fas fa-exclamation-circle"></i>
+        Nesprávne heslo, skúste znova.
+      </div>
     </div>
 
-    <!-- Skrytý obsah po zadaní hesla -->
     <div class="card" id="chraneny-obsah" style="display: none;">
-      <h2>📂 Študijné materiály a zadania cvičení</h2>
-      <p><strong>Úspešne odomknuté!</strong> Tu sú vaše aktuálne zadania:</p>
+      <h2>
+        <i class="fas fa-folder-open icon"></i>
+        Študijné materiály a zadania cvičení
+      </h2>
+      <p><strong>✅ Úspešne odomknuté!</strong> Tu sú vaše aktuálne zadania:</p>
       <ul>
-        <li><strong>Zadanie 1:</strong> Návrh a adresácia podsietí IPv4 / IPv6</li>
-        <li><strong>Zadanie 2:</strong> Konfigurácia prepínačov a VLAN v Cisco Packet Tracer</li>
-        <li><strong>Zadanie 3:</strong> Príprava a verzovanie webovej prezentácie na GitHube</li>
+        <li><strong><i class="fas fa-network-wired"></i> Zadanie 1:</strong> Návrh a adresácia podsietí IPv4 / IPv6</li>
+        <li><strong><i class="fas fa-ethernet"></i> Zadanie 2:</strong> Konfigurácia prepínačov a VLAN v Cisco Packet Tracer</li>
+        <li><strong><i class="fas fa-code-branch"></i> Zadanie 3:</strong> Príprava a verzovanie webovej prezentácie na GitHube</li>
       </ul>
-      <p style="margin-top: 15px; font-size: 13px; color: #57606a;">Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.</p>
+
+      <h3>
+        <i class="fas fa-images"></i>
+        Galéria študijných materiálov
+      </h3>
+      
+      <div class="upload-box" id="uploadBox">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <p style="margin: 10px 0; color: #7dd3fc; font-weight: 600;">Kliknite alebo potiahnutím nahrajte obrázky</p>
+        <p style="font-size: 12px; color: #95a5a6;">PNG, JPG, GIF - max 5MB</p>
+        <input type="file" id="fileInput" multiple accept="image/*" onchange="pridajObrazoky(event)">
+      </div>
+
+      <div class="gallery" id="galeria"></div>
+
+      <p style="margin-top: 30px; font-size: 13px; color: #95a5a6;">
+        <i class="fas fa-clipboard-list"></i>
+        Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.
+      </p>
     </div>
   </div>
 
   <script>
     function skontrolujHeslo() {
       const heslo = document.getElementById("hesloInput").value;
-      // Predvolené heslo je mps2026 (môžete si ho kedykoľvek zmeniť)
       if (heslo.trim().toLowerCase() === "mps2026") {
         document.getElementById("login-box").style.display = "none";
         document.getElementById("chraneny-obsah").style.display = "block";
+        nacitajObrazoky();
       } else {
         document.getElementById("chybaMsg").style.display = "block";
       }
+    }
+
+    const uploadBox = document.getElementById('uploadBox');
+    const fileInput = document.getElementById('fileInput');
+
+    uploadBox.addEventListener('click', () => fileInput.click());
+
+    uploadBox.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadBox.style.borderColor = 'rgba(125, 211, 252, 0.9)';
+      uploadBox.style.background = 'rgba(56, 189, 248, 0.15)';
+    });
+
+    uploadBox.addEventListener('dragleave', () => {
+      uploadBox.style.borderColor = 'rgba(56, 189, 248, 0.6)';
+      uploadBox.style.background = 'rgba(56, 189, 248, 0.05)';
+    });
+
+    uploadBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadBox.style.borderColor = 'rgba(56, 189, 248, 0.6)';
+      uploadBox.style.background = 'rgba(56, 189, 248, 0.05)';
+      const files = e.dataTransfer.files;
+      fileInput.files = files;
+      pridajObrazoky({ target: { files } });
+    });
+
+    function pridajObrazoky(event) {
+      const files = event.target.files;
+      for (let file of files) {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imgData = e.target.result;
+            ulozObrazkuLS(imgData);
+            vytvorGaleriuItem(imgData);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+      fileInput.value = '';
+    }
+
+    function ulozObrazkuLS(imgData) {
+      let obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
+      if (obrazoky.length < 20) {
+        obrazoky.push(imgData);
+        localStorage.setItem('mps-obrazoky', JSON.stringify(obrazoky));
+      }
+    }
+
+    function vytvorGaleriuItem(imgData) {
+      const galeria = document.getElementById('galeria');
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `
+        <img src="${imgData}" alt="Študijný materiál">
+        <button class="delete-btn" onclick="vymazObrazoky(this)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      `;
+      galeria.appendChild(item);
+    }
+
+    function nacitajObrazoky() {
+      const galeria = document.getElementById('galeria');
+      galeria.innerHTML = '';
+      const obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
+      obrazoky.forEach(imgData => vytvorGaleriuItem(imgData));
+    }
+
+    function vymazObrazoky(btn) {
+      const galeria = document.getElementById('galeria');
+      const item = btn.parentElement;
+      item.remove();
+
+      let obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
+      const items = Array.from(galeria.querySelectorAll('.gallery-item'));
+      const currentIndex = items.indexOf(item);
+      obrazoky.splice(currentIndex, 1);
+      localStorage.setItem('mps-obrazoky', JSON.stringify(obrazoky));
     }
   </script>
 
