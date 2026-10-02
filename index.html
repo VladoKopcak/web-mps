@@ -170,7 +170,7 @@
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
       transition: transform 0.3s ease;
-      min-height: 200px;
+      min-height: 220px;
       background: rgba(15, 23, 42, 0.8);
       border: 2px solid rgba(56, 189, 248, 0.35);
     }
@@ -182,7 +182,7 @@
     
     .gallery-item img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
       display: block;
     }
@@ -284,55 +284,37 @@
         <i class="fas fa-images"></i>
         Galéria študijných materiálov
       </h3>
-      
-      <!-- GALÉRIA - PRIDÁVAJTE OBRÁZKY TU -->
-      <div class="gallery" id="galeria">
-        <!-- Príklad: Pridajte obrázok tak, že nahradíte "image-url" skutočnou URL alebo cestou k obrázku -->
-        
-        <!-- Príklad 1: Z internetu (URL) -->
+
+      <div class="gallery">
+        <!-- Pridávaš obrázky priamo v kóde. -->
+        <!-- Lokálne obrázky: images/pc.jpg -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Počítačová sieť">
-          <div class="gallery-item-title">Počítačová sieť</div>
+          <img src="images/pc.jpg" alt="Počítač">
+          <div class="gallery-item-title">Počítač</div>
         </div>
 
-        <!-- Príklad 2: Z internetu (URL) -->
+        <!-- Lokálne obrázky: images/wifi.jpg -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1591290621236-d41a8e3a643d?w=400&h=300&fit=crop" alt="WiFi sieť">
-          <div class="gallery-item-title">WiFi sieť</div>
+          <img src="images/wifi.jpg" alt="WiFi">
+          <div class="gallery-item-title">WiFi</div>
         </div>
 
-        <!-- Príklad 3: Z internetu (URL) -->
+        <!-- Lokálne obrázky: images/network.jpg -->
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1617638924702-92f37fcb0f6d?w=400&h=300&fit=crop" alt="Serverovňa">
-          <div class="gallery-item-title">Serverovňa</div>
+          <img src="images/network.jpg" alt="Sieť">
+          <div class="gallery-item-title">Sieť</div>
         </div>
 
-        <!-- Príklad 4: Z lokálneho zložky images/ -->
-        <!-- ROZKOMENTUJTE a NAHRAĎTE cestou k vášmu obrázku: -->
-        <!-- 
+        <!-- Príklad z internetu: -->
         <div class="gallery-item">
-          <img src="images/moj-obrazok.jpg" alt="Môj obrázok">
-          <div class="gallery-item-title">Môj obrázok</div>
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Server">
+          <div class="gallery-item-title">Server</div>
         </div>
-        -->
-
       </div>
 
       <p style="margin-top: 30px; font-size: 13px; color: #95a5a6;">
         <i class="fas fa-clipboard-list"></i>
         Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.
-      </p>
-
-      <hr style="margin-top: 30px; border: 1px solid rgba(56, 189, 248, 0.2);">
-      <p style="margin-top: 20px; font-size: 12px; color: #7dd3fc;">
-        <strong>💡 Ako pridať obrázky:</strong><br>
-        1. Umiestnite obrázky do zložky <code>images/</code> vo vašom projekte<br>
-        2. Alebo použite URL obrázka z internetu<br>
-        3. Pridajte do galérie:<br>
-        <code>&lt;div class="gallery-item"&gt;<br>
-        &nbsp;&nbsp;&lt;img src="images/moj-obrazok.jpg" alt="Popis"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="gallery-item-title"&gt;Názov obrázka&lt;/div&gt;<br>
-        &lt;/div&gt;</code>
       </p>
     </div>
   </div>
