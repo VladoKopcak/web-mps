@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Študijný portál MPS</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background-color: #f6f8fa; color: #24292f; }
+    .container { max-width: 800px; margin: 0 auto; }
+    header { background: #0969da; color: white; padding: 24px; border-radius: 8px; margin-bottom: 20px; }
+    header h1 { margin: 0 0 8px 0; font-size: 24px; }
+    header p { margin: 0; opacity: 0.9; }
+    .card { background: white; padding: 24px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #d0d7de; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    h2 { margin-top: 0; color: #1f2328; font-size: 18px; }
+    input[type="password"] { padding: 10px 12px; border: 1px solid #d0d7de; border-radius: 6px; font-size: 14px; width: 220px; }
+    button { background: #2da44e; color: white; border: none; padding: 10px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    button:hover { background: #2c974b; }
+    .error { color: #cf222e; margin-top: 10px; font-size: 14px; display: none; }
+    ul { padding-left: 20px; line-height: 1.6; }
+    li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Odbor: Mechanik počítačových sietí</h1>
+      <p>Informačný portál a zadania pre študijnú skupinu</p>
+    </header>
+
+    <div class="card">
+      <h2>📢 Verejné oznamy</h2>
+      <p>Vitajte na informačnej stránke odboru. Učebné texty, podklady a zadania cvičení sú prístupné v chránenej zóne nižšie.</p>
+    </div>
+
+    <!-- Prihlasovací blok -->
+    <div class="card" id="login-box">
+      <h2>🔒 Vstup do študijnej zóny (pre žiakov)</h2>
+      <p>Pre zobrazenie zadaní zadajte prístupové heslo skupiny:</p>
+      <input type="password" id="hesloInput" placeholder="Heslo skupiny" onkeydown="if(event.key==='Enter') skontrolujHeslo()">
+      <button onclick="skontrolujHeslo()">Odomknúť</button>
+      <div id="chybaMsg" class="error">❌ Nesprávne heslo, skúste znova.</div>
+    </div>
+
+    <!-- Skrytý obsah po zadaní hesla -->
+    <div class="card" id="chraneny-obsah" style="display: none;">
+      <h2>📂 Študijné materiály a zadania cvičení</h2>
+      <p><strong>Úspešne odomknuté!</strong> Tu sú vaše aktuálne zadania:</p>
+      <ul>
+        <li><strong>Zadanie 1:</strong> Návrh a adresácia podsietí IPv4 / IPv6</li>
+        <li><strong>Zadanie 2:</strong> Konfigurácia prepínačov a VLAN v Cisco Packet Tracer</li>
+        <li><strong>Zadanie 3:</strong> Príprava a verzovanie webovej prezentácie na GitHube</li>
+      </ul>
+      <p style="margin-top: 15px; font-size: 13px; color: #57606a;">Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.</p>
+    </div>
+  </div>
+
+  <script>
+    function skontrolujHeslo() {
+      const heslo = document.getElementById("hesloInput").value;
+      // Predvolené heslo je mps2026 (môžete si ho kedykoľvek zmeniť)
+      if (heslo.trim().toLowerCase() === "mps2026") {
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("chraneny-obsah").style.display = "block";
+      } else {
+        document.getElementById("chybaMsg").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
