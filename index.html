@@ -170,66 +170,30 @@
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
       transition: transform 0.3s ease;
-      min-height: 180px;
+      min-height: 200px;
       background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(56, 189, 248, 0.35);
     }
     
     .gallery-item:hover {
       transform: scale(1.03);
+      border-color: rgba(125, 211, 252, 0.75);
     }
     
     .gallery-item img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       display: block;
     }
     
-    .gallery-item .delete-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(239, 68, 68, 0.9);
-      border: none;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .gallery-item:hover .delete-btn {
-      display: flex;
-    }
-    
-    .upload-box {
-      border: 2px dashed rgba(56, 189, 248, 0.6);
-      border-radius: 8px;
-      padding: 24px;
-      text-align: center;
-      background: rgba(56, 189, 248, 0.05);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      margin: 20px 0;
-    }
-    
-    .upload-box:hover {
-      border-color: rgba(125, 211, 252, 0.9);
-      background: rgba(56, 189, 248, 0.1);
-    }
-    
-    .upload-box input[type="file"] {
-      display: none;
-    }
-    
-    .upload-icon {
-      font-size: 40px;
+    .gallery-item-title {
+      padding: 12px;
+      background: rgba(17, 24, 39, 0.9);
       color: #7dd3fc;
-      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
     }
     
     .theme-icons {
@@ -321,20 +285,54 @@
         Galéria študijných materiálov
       </h3>
       
-      <div class="upload-box" id="uploadBox">
-        <div class="upload-icon">
-          <i class="fas fa-cloud-upload-alt"></i>
+      <!-- GALÉRIA - PRIDÁVAJTE OBRÁZKY TU -->
+      <div class="gallery" id="galeria">
+        <!-- Príklad: Pridajte obrázok tak, že nahradíte "image-url" skutočnou URL alebo cestou k obrázku -->
+        
+        <!-- Príklad 1: Z internetu (URL) -->
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Počítačová sieť">
+          <div class="gallery-item-title">Počítačová sieť</div>
         </div>
-        <p style="margin: 10px 0; color: #7dd3fc; font-weight: 600;">Kliknite alebo potiahnutím nahrajte obrázky</p>
-        <p style="font-size: 12px; color: #95a5a6;">PNG, JPG, GIF - max 5MB</p>
-        <input type="file" id="fileInput" multiple accept="image/*" onchange="pridajObrazoky(event)">
-      </div>
 
-      <div class="gallery" id="galeria"></div>
+        <!-- Príklad 2: Z internetu (URL) -->
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1591290621236-d41a8e3a643d?w=400&h=300&fit=crop" alt="WiFi sieť">
+          <div class="gallery-item-title">WiFi sieť</div>
+        </div>
+
+        <!-- Príklad 3: Z internetu (URL) -->
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1617638924702-92f37fcb0f6d?w=400&h=300&fit=crop" alt="Serverovňa">
+          <div class="gallery-item-title">Serverovňa</div>
+        </div>
+
+        <!-- Príklad 4: Z lokálneho zložky images/ -->
+        <!-- ROZKOMENTUJTE a NAHRAĎTE cestou k vášmu obrázku: -->
+        <!-- 
+        <div class="gallery-item">
+          <img src="images/moj-obrazok.jpg" alt="Môj obrázok">
+          <div class="gallery-item-title">Môj obrázok</div>
+        </div>
+        -->
+
+      </div>
 
       <p style="margin-top: 30px; font-size: 13px; color: #95a5a6;">
         <i class="fas fa-clipboard-list"></i>
         Poznámka: Vypracované protokoly nahrávajte podľa pokynov na cvičení.
+      </p>
+
+      <hr style="margin-top: 30px; border: 1px solid rgba(56, 189, 248, 0.2);">
+      <p style="margin-top: 20px; font-size: 12px; color: #7dd3fc;">
+        <strong>💡 Ako pridať obrázky:</strong><br>
+        1. Umiestnite obrázky do zložky <code>images/</code> vo vašom projekte<br>
+        2. Alebo použite URL obrázka z internetu<br>
+        3. Pridajte do galérie:<br>
+        <code>&lt;div class="gallery-item"&gt;<br>
+        &nbsp;&nbsp;&lt;img src="images/moj-obrazok.jpg" alt="Popis"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="gallery-item-title"&gt;Názov obrázka&lt;/div&gt;<br>
+        &lt;/div&gt;</code>
       </p>
     </div>
   </div>
@@ -345,91 +343,9 @@
       if (heslo.trim().toLowerCase() === "mps2026") {
         document.getElementById("login-box").style.display = "none";
         document.getElementById("chraneny-obsah").style.display = "block";
-        nacitajObrazoky();
       } else {
         document.getElementById("chybaMsg").style.display = "block";
       }
-    }
-
-    const uploadBox = document.getElementById('uploadBox');
-    const fileInput = document.getElementById('fileInput');
-
-    uploadBox.addEventListener('click', () => fileInput.click());
-
-    uploadBox.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      uploadBox.style.borderColor = 'rgba(125, 211, 252, 0.9)';
-      uploadBox.style.background = 'rgba(56, 189, 248, 0.15)';
-    });
-
-    uploadBox.addEventListener('dragleave', () => {
-      uploadBox.style.borderColor = 'rgba(56, 189, 248, 0.6)';
-      uploadBox.style.background = 'rgba(56, 189, 248, 0.05)';
-    });
-
-    uploadBox.addEventListener('drop', (e) => {
-      e.preventDefault();
-      uploadBox.style.borderColor = 'rgba(56, 189, 248, 0.6)';
-      uploadBox.style.background = 'rgba(56, 189, 248, 0.05)';
-      const files = e.dataTransfer.files;
-      fileInput.files = files;
-      pridajObrazoky({ target: { files } });
-    });
-
-    function pridajObrazoky(event) {
-      const files = event.target.files;
-      for (let file of files) {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const imgData = e.target.result;
-            ulozObrazkuLS(imgData);
-            vytvorGaleriuItem(imgData);
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-      fileInput.value = '';
-    }
-
-    function ulozObrazkuLS(imgData) {
-      let obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
-      if (obrazoky.length < 20) {
-        obrazoky.push(imgData);
-        localStorage.setItem('mps-obrazoky', JSON.stringify(obrazoky));
-      }
-    }
-
-    function vytvorGaleriuItem(imgData) {
-      const galeria = document.getElementById('galeria');
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.innerHTML = `
-        <img src="${imgData}" alt="Študijný materiál">
-        <button class="delete-btn" onclick="vymazObrazoky(this)">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      `;
-      galeria.appendChild(item);
-    }
-
-    function nacitajObrazoky() {
-      const galeria = document.getElementById('galeria');
-      galeria.innerHTML = '';
-      const obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
-      obrazoky.forEach(imgData => vytvorGaleriuItem(imgData));
-    }
-
-    function vymazObrazoky(btn) {
-      const galeria = document.getElementById('galeria');
-      const item = btn.parentElement;
-      item.remove();
-
-      let obrazoky = JSON.parse(localStorage.getItem('mps-obrazoky')) || [];
-      const items = Array.from(galeria.querySelectorAll('.gallery-item'));
-      const currentIndex = items.indexOf(item);
-      obrazoky.splice(currentIndex, 1);
-      localStorage.setItem('mps-obrazoky', JSON.stringify(obrazoky));
     }
   </script>
 
