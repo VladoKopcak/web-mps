@@ -7,28 +7,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-      background: linear-gradient(135deg, #0f172a 0%, #111827 100%); 
-      color: #e5f3ff; 
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+      color: #e5f3ff;
       min-height: 100vh;
       padding: 20px;
     }
-    
+
     .container { max-width: 900px; margin: 0 auto; }
-    
-    header { 
+
+    header {
       background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-      color: white; 
+      color: white;
       padding: 40px 24px;
-      border-radius: 12px; 
+      border-radius: 12px;
       margin-bottom: 30px;
       box-shadow: 0 8px 32px rgba(14, 165, 233, 0.35);
       position: relative;
       overflow: hidden;
     }
-    
+
     header::before {
       content: '';
       position: absolute;
@@ -39,21 +39,21 @@
       background: rgba(255, 255, 255, 0.12);
       border-radius: 50%;
     }
-    
-    header h1 { 
-      margin: 0 0 12px 0; 
+
+    header h1 {
+      margin: 0 0 12px 0;
       font-size: 32px;
       position: relative;
       z-index: 1;
     }
-    
-    header p { 
-      margin: 0; 
+
+    header p {
+      margin: 0;
       opacity: 0.95;
       position: relative;
       z-index: 1;
     }
-    
+
     .header-icons {
       position: absolute;
       right: 30px;
@@ -62,147 +62,100 @@
       opacity: 0.25;
       z-index: 1;
     }
-    
-    .card { 
+
+    .card {
       background: rgba(17, 24, 39, 0.8);
-      padding: 28px; 
-      margin-bottom: 24px; 
-      border-radius: 12px; 
+      padding: 28px;
+      margin-bottom: 24px;
+      border-radius: 12px;
       border: 1px solid rgba(59, 130, 246, 0.35);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(10px);
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
-    
+
     .card:hover {
       transform: translateY(-2px);
       border-color: rgba(56, 189, 248, 0.75);
     }
-    
-    h2 { 
-      margin-top: 0; 
+
+    h2 {
+      margin-top: 0;
       color: #7dd3fc;
       font-size: 20px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    
-    h3 {
-      margin-top: 24px;
-      color: #7dd3fc;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
+
     .icon { font-size: 24px; }
-    
-    input[type="password"] { 
-      padding: 12px 14px; 
+
+    input[type="password"] {
+      padding: 12px 14px;
       border: 2px solid rgba(56, 189, 248, 0.5);
-      border-radius: 8px; 
-      font-size: 14px; 
+      border-radius: 8px;
+      font-size: 14px;
       width: 240px;
       background: rgba(14, 165, 233, 0.05);
       color: #e5f3ff;
       transition: border-color 0.3s ease;
     }
-    
+
     input[type="password"]:focus {
       outline: none;
       border-color: #7dd3fc;
       background: rgba(14, 165, 233, 0.1);
     }
-    
-    button { 
+
+    button {
       background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-      color: white; 
-      border: none; 
-      padding: 12px 24px; 
-      border-radius: 8px; 
-      font-size: 14px; 
-      font-weight: 600; 
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       margin-top: 12px;
     }
-    
-    button:hover { 
+
+    button:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
     }
-    
+
     button:active { transform: scale(0.98); }
-    
-    .error { 
-      color: #fca5a5; 
-      margin-top: 12px; 
-      font-size: 14px; 
+
+    .error {
+      color: #fca5a5;
+      margin-top: 12px;
+      font-size: 14px;
       display: none;
       background: rgba(239, 68, 68, 0.12);
       padding: 10px;
       border-radius: 6px;
       border-left: 3px solid #f87171;
     }
-    
-    ul { 
-      padding-left: 20px; 
+
+    ul {
+      padding-left: 20px;
       line-height: 1.8;
       margin: 20px 0;
     }
-    
-    li { 
+
+    li {
       margin-bottom: 12px;
       color: #e5f3ff;
     }
-    
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 24px 0;
-    }
-    
-    .gallery-item {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-      transition: transform 0.3s ease;
-      min-height: 220px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 2px solid rgba(56, 189, 248, 0.35);
-    }
-    
-    .gallery-item:hover {
-      transform: scale(1.03);
-      border-color: rgba(125, 211, 252, 0.75);
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-    
-    .gallery-item-title {
-      padding: 12px;
-      background: rgba(17, 24, 39, 0.9);
-      color: #7dd3fc;
-      font-size: 12px;
-      font-weight: 600;
-      text-align: center;
-    }
-    
+
     .theme-icons {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       margin: 20px 0;
     }
-    
+
     .theme-icon {
       width: 60px;
       height: 60px;
@@ -240,7 +193,7 @@
         Verejné oznamy
       </h2>
       <p>Vitajte na informačnej stránke odboru. Učebné texty, podklady a zadania cvičení sú prístupné v chránenej zóne nižšie.</p>
-      
+
       <div class="theme-icons">
         <div class="theme-icon"><i class="fas fa-laptop"></i></div>
         <div class="theme-icon"><i class="fas fa-server"></i></div>
@@ -279,38 +232,6 @@
         <li><strong><i class="fas fa-ethernet"></i> Zadanie 2:</strong> Konfigurácia prepínačov a VLAN v Cisco Packet Tracer</li>
         <li><strong><i class="fas fa-code-branch"></i> Zadanie 3:</strong> Príprava a verzovanie webovej prezentácie na GitHube</li>
       </ul>
-
-      <h3>
-        <i class="fas fa-images"></i>
-        Galéria študijných materiálov
-      </h3>
-   
-      <div class="gallery">
-        <!-- Pridávaš obrázky priamo v kóde. -->
-        <!-- Lokálne obrázky: images/pc.jpg -->
-        <div class="gallery-item">
-          <img src="images/pc.jpg" alt="Počítač">
-          <div class="gallery-item-title">Počítač</div>
-        </div>
-
-        <!-- Lokálne obrázky: images/wifi.jpg -->
-        <div class="gallery-item">
-          <img src="images/wifi.jpg" alt="WiFi">
-          <div class="gallery-item-title">WiFi</div>
-        </div>
-
-        <!-- Lokálne obrázky: images/network.jpg -->
-        <div class="gallery-item">
-          <img src="images/network.jpg" alt="Sieť">
-          <div class="gallery-item-title">Sieť</div>
-        </div>
-
-        <!-- Príklad z internetu: -->
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Server">
-          <div class="gallery-item-title">Server</div>
-        </div>
-      </div>
 
       <p style="margin-top: 30px; font-size: 13px; color: #95a5a6;">
         <i class="fas fa-clipboard-list"></i>
